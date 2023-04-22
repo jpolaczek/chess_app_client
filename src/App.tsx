@@ -1,22 +1,22 @@
 import './App.css';
-import React, { Component } from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Signup from './components/Signup';
 
-type MyProps = {
-}
-
-class App extends Component<MyProps>{
-  constructor(props: MyProps) {
-    super(props)
-  }
-
-
-  render() {
-    return (
-      <div className='App'>
-        <h1>React Typescript Application!!</h1>
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <div className="content">
+          <Switch>
+            <Route exact path="/sign_up">
+              <Signup />
+            </Route>
+          </Switch>
+        </div>
       </div>
-    );
-  }
+    </Router>
+  );
 }
+
 export default App;
+
