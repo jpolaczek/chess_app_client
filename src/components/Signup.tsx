@@ -1,36 +1,11 @@
-import axios from "axios";
-import { FormEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
+import UserForm from "./UserForm";
 
 const Signup = () => {
-    const [playersName, setPlayersName] = useState('');
-    const [password, setPassword] = useState('');
-    const history = useHistory();
-
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        axios.post('/api/sign_up', { name: playersName, password: password })
-            .then(() => { alert('success post') })
-    }
-
     return (
-        <form onSubmit={handleSubmit}>
-            <label>players name:</label>
-            <input
-                type="text"
-                required
-                value={playersName}
-                onChange={(e) => setPlayersName(e.target.value)}
-            />
-            <label>players password:</label>
-            <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button>Signup</button>
-        </form>
+        <div>
+            <h3>Sign up:</h3>
+            <UserForm serverUrl='/api/sign_up' redirectUrl="/sign_in" buttonName="Sign up" />
+        </div>
     );
 }
 
