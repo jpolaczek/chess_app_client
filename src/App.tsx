@@ -10,6 +10,7 @@ function App() {
   const { loggedIn, username, error } = fetchSessionData()
 
   return (
+
     <Router>
       <div className="App">
         <LoginBar />
