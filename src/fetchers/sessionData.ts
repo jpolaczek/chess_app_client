@@ -1,23 +1,20 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 
-const fetchSessionData = () => {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [username, setUsername] = useState('')
-    const [error, setError] = useState('')
+const fetchSessionData = (
+    setLoggedIn: (loggedIn: boolean)=> void,
+    setUsername: (username: string)=> void,
+    setError: (error: string)=> void,
+    ) => {
 
-    useEffect(() => {
-        axios.get('/api/session_data')
-            .then(res =>{
-                setLoggedIn(res.data.signed_in)
-                setUsername(res.data.username)
-            }, error => {
-                console.log(error)
-                setError(error.message)
-            })
-    }, [])
-
-    return { loggedIn, username, error };
+    axios.get('/api/session_data').then(res =>{
+            setLoggedIn(res.data.signed_in)
+            setUsername(res.data.username)
+            console.log('success!')
+        }, error => {
+            console.log(error)
+            setError(error.message)
+        }
+    );
 }
  
 export default fetchSessionData;

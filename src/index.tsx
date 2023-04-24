@@ -6,12 +6,7 @@ import Container from 'react-bootstrap/Container';
 
 
 ReactDOM.render(
-  <ThemeProvider
-    breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
-    minBreakpoint="xxs"
-  >
-    <Container><App />,</Container>
-  </ThemeProvider>
+  <Container><App /></Container>
   ,
   document.getElementById('root')
 );

@@ -1,10 +1,15 @@
+import { UseStateType } from "../types/state-types";
 import UserForm from "./UserForm";
 
-const SignIn = () => {
+const SignIn = ({ setLoggedIn }: UseStateType) => {
+    const callback = (loggedIn: boolean) => {
+        setLoggedIn(loggedIn)
+    }
+
     return (
         <div>
             <h3>Sign in:</h3>
-            <UserForm redirectUrl='/' buttonName="Sign in" serverUrl="/api/sign_in" />
+            <UserForm callback={callback} redirectUrl='/home' buttonName="Sign in" serverUrl="/api/sign_in" />
         </div>
     );
 }
