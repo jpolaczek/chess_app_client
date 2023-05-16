@@ -1,7 +1,4 @@
-import axios from "axios";
-import { FormEvent } from "react";
 import UserForm from "./UserForm";
-import { UseStateType } from "../types/state-types";
 
 const Signup = () => {
     return (

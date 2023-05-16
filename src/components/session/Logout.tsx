@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
-import { UseStateType } from '../types/state-types';
+import { UseStateType } from '../../types/state-types';
 
 const Logout = ({ setLoggedIn }: UseStateType) => {
     return (

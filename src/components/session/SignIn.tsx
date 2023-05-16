@@ -1,5 +1,5 @@
-import { UseStateType } from "../types/state-types";
-import UserForm from "./UserForm";
+import { UseStateType } from "../../types/state-types";
+import UserForm from "../users/UserForm";
 
 const SignIn = ({ setLoggedIn }: UseStateType) => {
     const callback = (loggedIn: boolean) => {

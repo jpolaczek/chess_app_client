@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { UseStateType } from "../types/state-types";
+import { UseStateType } from "../../types/state-types";
 
 type HandleSubmitType = {
     serverUrl: string,
