@@ -1,4 +1,6 @@
-const Field = ({ row, column }: { row: number, column: number }) => {
+import PieceMaker from "../pieces/PieceMaker";
+
+const Field = ({ row, column, piece }: { row: number, column: number, piece: string | null }) => {
     return (
         < div
             className={`box ${(row + column) % 2 === 0
@@ -7,6 +9,7 @@ const Field = ({ row, column }: { row: number, column: number }) => {
             }
             key={column}
         >
+            {piece && PieceMaker({ x: row, y: column, type: piece })}
         </div>
     )
 }

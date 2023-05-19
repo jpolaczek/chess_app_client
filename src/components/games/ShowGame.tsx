@@ -1,17 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Field from "./board/Field";
 import Row from "./board/Row";
-
-type RowType = {
-    fields: FieldType[]
-}
-
-type FieldType = {
-    color: 0 | 1
-    positionX: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-    positionY: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-}
+import RowType from "./board/RowType";
+import SetType from "./board/SetType";
 
 const ShowGame = () => {
     const { id }: { id: string } = useParams();
@@ -31,8 +22,14 @@ const ShowGame = () => {
     }, [])
 
     const renderBoard = (): JSX.Element[] => {
+        const pieces = {
+            1: {
+                0: "pawn"
+            }
+        } as SetType
+
         return chessBoard.map((row, rIndex) => {
-            return <Row row={row} rowIndex={rIndex} />
+            return <Row row={row} rowIndex={rIndex} pieces={pieces[rIndex]} />
         })
     }
 
