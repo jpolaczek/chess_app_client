@@ -1,8 +1,8 @@
 import Field from "./Field";
 import RowType from "./RowType";
-import SubSetType from "./SubSetType";
+import SubSet from "./SubSet";
 
-const Row = ({ row, rowIndex, pieces }: { row: RowType, rowIndex: number, pieces: SubSetType | null }) => {
+const Row = ({ row, rowIndex, pieces }: { row: RowType, rowIndex: number, pieces: SubSet | null }) => {
     return (
         <div className="chess-row" key={rowIndex}>
             {row.fields.map((_, cIndex) => {

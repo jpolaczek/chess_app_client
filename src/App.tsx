@@ -12,7 +12,6 @@ import Logout from './components/session/Logout';
 import { useState, useEffect } from 'react';
 import CreateGame from './components/games/CreateGame';
 import PrivateRoute from './components/PrivateRoute';
-import ListMyGames from './components/games/ListMyGames';
 import ShowGame from './components/games/ShowGame';
 
 function App() {
@@ -45,40 +44,32 @@ function App() {
           </Container>
         </Navbar>
         <div className="content">
-          <Switch>
-            <Route exact path="/sign_up">
-              <Signup />
-            </Route>
-            <Route exact path="/sign_in">
-              <SignIn setLoggedIn={setLoggedIn} />
-            </Route>
-            {!loading &&
-              <div className="privateContent">
-                <Route exact path="/games/new">
-                  <PrivateRoute isLogged={loggedIn}>
-                    <CreateGame />
-                  </PrivateRoute>
-                </Route>
-                <Route exact path="/games/mine">
-                  <PrivateRoute isLogged={loggedIn}>
-                    <ListMyGames />
-                  </PrivateRoute>
-                </Route>
-                <Route exact path="/games/:id">
-                  <PrivateRoute isLogged={loggedIn}>
-                    <ShowGame />
-                  </PrivateRoute>
-                </Route>
-                <Route exact path="/home">
-                  <Home loggedIn={loggedIn} userId={userId} />
-                </Route>
-                <Route exact path="/">
-                  <Home loggedIn={loggedIn} userId={userId} />
-                </Route>
-              </div>
-            }
-          </Switch>
-
+          {!loading &&
+            <Switch>
+              <Route exact path="/sign_up">
+                <Signup />
+              </Route>
+              <Route exact path="/sign_in">
+                <SignIn setLoggedIn={setLoggedIn} />
+              </Route>
+              <Route exact path="/games/new">
+                <PrivateRoute isLogged={loggedIn}>
+                  <CreateGame />
+                </PrivateRoute>
+              </Route>
+              <Route exact path="/games/:id">
+                <PrivateRoute isLogged={loggedIn}>
+                  <ShowGame />
+                </PrivateRoute>
+              </Route>
+              <Route exact path="/home">
+                <Home loggedIn={loggedIn} userId={userId} />
+              </Route>
+              <Route exact path="/">
+                <Home loggedIn={loggedIn} userId={userId} />
+              </Route>
+            </Switch>
+          }
         </div>
       </div>
     </Router >

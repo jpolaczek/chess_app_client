@@ -1,9 +1,11 @@
+import Piece from "../board/Piece"
 import Pawn from "./pawn"
+import { Position } from "./position"
 
-const PieceMaker = ({ x, y, type }: Position & { type: string }) => {
-    switch (type) {
-        case "pawn": {
-            return (<Pawn x={x} y={y} />)
+const PieceMaker = ({ x, y, pieceType, colour }: Position & Piece) => {
+    switch (pieceType) {
+        case 0: {
+            return (<Pawn x={x} y={y} colour={colour} />)
         }
     }
 }
