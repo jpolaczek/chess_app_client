@@ -1,15 +1,15 @@
 import Field from "./Field";
-import RowType from "./RowType";
+import RowData from "./RowData";
 import SubSet from "./SubSet";
 
-const Row = ({ row, rowIndex, pieces }: { row: RowType, rowIndex: number, pieces: SubSet | null }) => {
+const Row = ({ row, pieces }: { row: RowData, pieces: SubSet | null }) => {
     return (
-        <div className="chess-row" key={rowIndex}>
-            {row.fields.map((_, cIndex) => {
-                if (pieces && pieces[cIndex]) {
-                    return <Field row={rowIndex} column={cIndex} piece={pieces[cIndex]} />
+        <div className="chess-row" key={row.index}>
+            {row.fields.map((field) => {
+                if (pieces && pieces[field.y]) {
+                    return <Field row={field.x} column={field.y} piece={pieces[field.y]} colour={field.colour} />
                 } else {
-                    return <Field row={rowIndex} column={cIndex} piece={null} />
+                    return <Field row={field.x} column={field.y} piece={null} colour={field.colour} />
                 }
             })}
         </div>

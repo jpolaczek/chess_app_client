@@ -1,4 +1,4 @@
-import Piece from "./Piece"
+import Piece from "../pieces/Piece"
 
 type SubSet = {
     [y: number]: Piece

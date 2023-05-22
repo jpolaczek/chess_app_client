@@ -1,15 +1,9 @@
 import PieceMaker from "../pieces/PieceMaker";
-import Piece from "./Piece";
+import Piece from "../pieces/Piece";
 
-const Field = ({ row, column, piece }: { row: number, column: number, piece: Piece | null }) => {
+const Field = ({ row, column, piece, colour }: { row: number, column: number, piece: Piece | null, colour: string }) => {
     return (
-        < div
-            className={`box ${(row + column) % 2 === 0
-                ? "brown" : "white"
-                }`
-            }
-            key={column}
-        >
+        <div className={`box ${colour}`} key={column}>
             {piece && PieceMaker({ x: row, y: column, pieceType: piece.pieceType, colour: piece.colour })}
         </div>
     )
