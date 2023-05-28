@@ -1,10 +1,16 @@
-import PieceMaker from "../pieces/PieceMaker";
-import Piece from "../pieces/Piece";
+import { FieldPosition } from "../pieces/position";
 
-const Field = ({ row, column, piece, colour }: { row: number, column: number, piece: Piece | null, colour: string }) => {
+const Field = ({ x, y, children, colour, setTargetField }: FieldPosition & { children: JSX.Element | null, colour: string, setTargetField: ({ x, y }: FieldPosition) => void }) => {
+    const onClickHandle = (x: number, y: number) => {
+        if (!children) {
+            setTargetField({ x, y })
+        }
+    }
+
     return (
-        <div className={`box ${colour}`} key={column}>
-            {piece && PieceMaker({ x: row, y: column, pieceType: piece.pieceType, colour: piece.colour })}
+        <div className={`box ${colour}`} onClick={() => onClickHandle(x, y)}
+        >
+            {children}
         </div>
     )
 }

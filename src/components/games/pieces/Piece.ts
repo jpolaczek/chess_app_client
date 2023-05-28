@@ -1,5 +1,5 @@
 type Piece = {
-    pieceType: number,
+    pieceType: 0,
     colour: boolean
 }
 

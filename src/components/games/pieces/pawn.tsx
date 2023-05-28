@@ -1,17 +1,21 @@
 import WhitePawnPicture from '../../../static/whitePawn.png'
 import BlackPawnPicture from '../../../static/blackPawn.png'
 
-import { Position } from './position'
+import { PawnPosition } from './position'
 
-interface Pawn extends Position {
-    colour: boolean
+interface PawnType extends PawnPosition {
+    colour: boolean | null
 }
 
-const Pawn = ({ x, y, colour }: Pawn) => {
+const Pawn = ({ x, y, colour, setMovingPiece }: PawnType & { setMovingPiece: ({ x, y }: PawnPosition) => void }) => {
     const img: string = colour ? WhitePawnPicture : BlackPawnPicture
 
+    const onClickHandle = ({ x, y }: PawnPosition) => {
+        setMovingPiece({ x, y })
+    }
+
     return (
-        <span>
+        <span onClick={() => onClickHandle({ x, y })}>
             {<img src={img} height={"25px"} />}
         </span>
     )

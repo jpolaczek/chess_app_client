@@ -1,25 +1,35 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Set from "./board/Set";
 import fetchPieces from "../../fetchers/pieces";
-import InitializeBoard, { BoardData } from "./board/InitializeBoard";
 import Board from "./board/Board";
+import { FieldPosition, PawnPosition } from "./pieces/position";
+import ChessSet from "./board/Set";
 
 const ShowGame = () => {
     const { id }: { id: string } = useParams();
-    const chessBoard: BoardData = InitializeBoard(8)
     const [loading, setLoading] = useState(true)
-    const [pieces, setPieces] = useState({} as Set)
+    const [pieces, setPieces] = useState<ChessSet>({})
+    const [movingPiece, setMovingPiece] = useState({} as PawnPosition)
+    const [targetField, setTargetField] = useState({} as FieldPosition)
 
     useEffect(() => {
         fetchPieces(Number(id), setPieces)
         setLoading(false)
     }, [])
 
+    useEffect(() => {
+        if (movingPiece.x && movingPiece.y) {
+            const updatedPieces = { ...pieces };
+            updatedPieces[targetField.y][targetField.x] = updatedPieces[movingPiece.y][movingPiece.x]
+            updatedPieces[movingPiece.y][movingPiece.x] = null
+            setPieces(updatedPieces)
+        }
+    }, [targetField.x, targetField.y])
+
     return (
         <div>
             <h3>Game {id}</h3>
-            {!loading && <Board boardData={chessBoard} pieces={pieces} />}
+            {!loading && <Board pieces={pieces} setMovingPiece={setMovingPiece} setTargetField={setTargetField} />}
         </div >
     );
 }

@@ -1,10 +1,8 @@
 import axios from "axios";
-import Set from "../components/games/board/Set";
+import ChessSet from "../components/games/board/Set";
 
-const fetchPieces = (gameId: number, setPieces: (pieces: Set)=> void) => {
+const fetchPieces = (gameId: number, setPieces: (pieces: ChessSet)=> void) => {
     axios.get('/api/games/' + gameId + '/pieces').then(res =>{
-            console.log("successfully got pieces")
-            console.log(res.data.object)
             setPieces(res.data.object)
         }, error => {
             console.log("error while getting pieces")

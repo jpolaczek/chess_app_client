@@ -1,7 +1,7 @@
 import SubSet from "./SubSet"
 
-type Set = {
+type ChessSet = {
     [x: number]: SubSet
 }
 
-export default Set
+export default ChessSet
