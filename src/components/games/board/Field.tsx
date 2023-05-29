@@ -21,9 +21,10 @@ const Field = ({
     const onClickHandle = (x: number, y: number) => {
         if (!children) {
             setTargetField({ x, y });
+            console.log('new target field', y, x)
         } else {
             setMovingPiece({ x, y });
-            setFieldColour('yellow')
+            console.log('new moving piece', y, x)
         }
     };
 

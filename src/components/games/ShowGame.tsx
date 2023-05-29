@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import fetchPieces from "../../fetchers/pieces";
 import Board from "./board/Board";
 import { FieldPosition, PawnPosition } from "./pieces/position";
 import ChessSet from "./board/Set";
+import Piece from "./pieces/Piece";
 
 const ShowGame = () => {
     const { id }: { id: string } = useParams();
@@ -11,6 +12,7 @@ const ShowGame = () => {
     const [pieces, setPieces] = useState<ChessSet>({})
     const [movingPiece, setMovingPiece] = useState({} as PawnPosition)
     const [targetField, setTargetField] = useState({} as FieldPosition)
+    const previousValueRef = useRef({} as FieldPosition);
 
     useEffect(() => {
         fetchPieces(Number(id), setPieces)
@@ -22,6 +24,7 @@ const ShowGame = () => {
             const updatedPieces = { ...pieces };
             let fieldInfo = updatedPieces[targetField.y][targetField.x]
             fieldInfo.piece = updatedPieces[movingPiece.y][movingPiece.x].piece
+            console.log(fieldInfo)
             updatedPieces[movingPiece.y][movingPiece.x].piece = null
             updatedPieces[movingPiece.y][movingPiece.x].highlighted = false
 
@@ -31,10 +34,19 @@ const ShowGame = () => {
 
     useEffect(() => {
         if (movingPiece.x && movingPiece.y) {
-            pieces[movingPiece.y][movingPiece.x].highlighted = true
-            setPieces(pieces)
+            const updatedPieces = { ...pieces };
+
+            Object.entries(updatedPieces).map(([y, subset]) => {
+                Object.entries(subset).map(([x, _]) => {
+                    if (Number(x) != movingPiece.x || Number(y) != movingPiece.y) {
+                        updatedPieces[Number(y)][Number(x)].highlighted = false
+                    }
+                })
+            })
+            updatedPieces[movingPiece.y][movingPiece.x].highlighted = true
+            setPieces(updatedPieces)
         }
-    }, [movingPiece.x, movingPiece.y])
+    }, [movingPiece])
 
 
 
