@@ -7,15 +7,11 @@ interface PawnType extends PawnPosition {
     colour: boolean | null
 }
 
-const Pawn = ({ x, y, colour, setMovingPiece }: PawnType & { setMovingPiece: ({ x, y }: PawnPosition) => void }) => {
+const Pawn = ({ x, y, colour }: PawnType) => {
     const img: string = colour ? WhitePawnPicture : BlackPawnPicture
 
-    const onClickHandle = ({ x, y }: PawnPosition) => {
-        setMovingPiece({ x, y })
-    }
-
     return (
-        <span onClick={() => onClickHandle({ x, y })}>
+        <span>
             {<img src={img} height={"25px"} />}
         </span>
     )

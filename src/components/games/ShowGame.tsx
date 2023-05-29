@@ -20,11 +20,23 @@ const ShowGame = () => {
     useEffect(() => {
         if (movingPiece.x && movingPiece.y) {
             const updatedPieces = { ...pieces };
-            updatedPieces[targetField.y][targetField.x] = updatedPieces[movingPiece.y][movingPiece.x]
-            updatedPieces[movingPiece.y][movingPiece.x] = null
+            let fieldInfo = updatedPieces[targetField.y][targetField.x]
+            fieldInfo.piece = updatedPieces[movingPiece.y][movingPiece.x].piece
+            updatedPieces[movingPiece.y][movingPiece.x].piece = null
+            updatedPieces[movingPiece.y][movingPiece.x].highlighted = false
+
             setPieces(updatedPieces)
         }
     }, [targetField.x, targetField.y])
+
+    useEffect(() => {
+        if (movingPiece.x && movingPiece.y) {
+            pieces[movingPiece.y][movingPiece.x].highlighted = true
+            setPieces(pieces)
+        }
+    }, [movingPiece.x, movingPiece.y])
+
+
 
     return (
         <div>

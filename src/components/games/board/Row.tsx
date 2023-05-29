@@ -8,17 +8,16 @@ const Row = ({ y, row, setMovingPiece, setTargetField }: { y: number, row: SubSe
     const log = (arg: string) => {
         console.log(arg)
     }
-    log("render")
+
     return (
         < div className="chess-row" key={y} >
             {
-                Object.entries(row).map(([x, piece]) => (
-                    < Field x={Number(x)} y={y} colour={(y + Number(x)) % 2 === 0 ? Colours.White : Colours.Black} setTargetField={setTargetField}>
+                Object.entries(row).map(([x, fieldInfo]) => (
+                    < Field x={Number(x)} y={y} highlighted={fieldInfo.highlighted} colour={(y + Number(x)) % 2 === 0 ? Colours.White : Colours.Black} setTargetField={setTargetField} setMovingPiece={setMovingPiece}>
                         {PieceMaker({
                             x: Number(x),
                             y: y,
-                            piece: piece,
-                            setMovingPiece: setMovingPiece
+                            piece: fieldInfo?.piece
                         })}
                     </Field>
                 ))
