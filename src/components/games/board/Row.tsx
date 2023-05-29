@@ -5,10 +5,6 @@ import Field from "./Field";
 import SubSet from "./SubSet";
 
 const Row = ({ y, row, setMovingPiece, setTargetField }: { y: number, row: SubSet, setMovingPiece: ({ x, y }: PawnPosition) => void, setTargetField: ({ x, y }: FieldPosition) => void }) => {
-    const log = (arg: string) => {
-        console.log(arg)
-    }
-
     return (
         < div className="chess-row" key={y} >
             {

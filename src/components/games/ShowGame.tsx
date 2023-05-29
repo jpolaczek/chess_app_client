@@ -4,7 +4,6 @@ import fetchPieces from "../../fetchers/pieces";
 import Board from "./board/Board";
 import { FieldPosition, PawnPosition } from "./pieces/position";
 import ChessSet from "./board/Set";
-import Piece from "./pieces/Piece";
 
 const ShowGame = () => {
     const { id }: { id: string } = useParams();
@@ -12,7 +11,6 @@ const ShowGame = () => {
     const [pieces, setPieces] = useState<ChessSet>({})
     const [movingPiece, setMovingPiece] = useState({} as PawnPosition)
     const [targetField, setTargetField] = useState({} as FieldPosition)
-    const previousValueRef = useRef({} as FieldPosition);
 
     useEffect(() => {
         fetchPieces(Number(id), setPieces)
@@ -24,13 +22,12 @@ const ShowGame = () => {
             const updatedPieces = { ...pieces };
             let fieldInfo = updatedPieces[targetField.y][targetField.x]
             fieldInfo.piece = updatedPieces[movingPiece.y][movingPiece.x].piece
-            console.log(fieldInfo)
             updatedPieces[movingPiece.y][movingPiece.x].piece = null
             updatedPieces[movingPiece.y][movingPiece.x].highlighted = false
 
             setPieces(updatedPieces)
         }
-    }, [targetField.x, targetField.y])
+    }, [targetField])
 
     useEffect(() => {
         if (movingPiece.x && movingPiece.y) {
@@ -47,8 +44,6 @@ const ShowGame = () => {
             setPieces(updatedPieces)
         }
     }, [movingPiece])
-
-
 
     return (
         <div>
