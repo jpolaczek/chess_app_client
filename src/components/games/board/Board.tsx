@@ -1,8 +1,9 @@
 import ChessSet from "../board/Set";
-import { FieldPosition, PawnPosition } from "../pieces/position";
 import Row from "./Row"
+import { setPosition } from "../../../types/state-types"
 
-const Board = ({ pieces, setMovingPiece, setTargetField }: { pieces: ChessSet, setMovingPiece: ({ x, y }: PawnPosition) => void, setTargetField: ({ x, y }: FieldPosition) => void }) => {
+
+const Board = ({ pieces, setMovingPiece, setTargetField }: { pieces: ChessSet, setMovingPiece: setPosition, setTargetField: setPosition }) => {
     return (
         <div>
             {Object.entries(pieces).map(([y, subset]) => (

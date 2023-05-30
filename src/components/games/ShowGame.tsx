@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import fetchPieces from "../../fetchers/pieces";
 import Board from "./board/Board";
-import { FieldPosition, PawnPosition } from "./pieces/position";
+import { Position } from "./pieces/position";
 import ChessSet from "./board/Set";
 
 const ShowGame = () => {
     const { id }: { id: string } = useParams();
     const [loading, setLoading] = useState(true)
     const [pieces, setPieces] = useState<ChessSet>({})
-    const [movingPiece, setMovingPiece] = useState({} as PawnPosition)
-    const [targetField, setTargetField] = useState({} as FieldPosition)
+    const [movingPiece, setMovingPiece] = useState({ x: 0, y: 0 } as Position)
+    const [targetField, setTargetField] = useState({ x: 0, y: 0 } as Position)
 
     useEffect(() => {
         fetchPieces(Number(id), setPieces)
@@ -20,8 +20,7 @@ const ShowGame = () => {
     useEffect(() => {
         if (movingPiece.x && movingPiece.y) {
             const updatedPieces = { ...pieces };
-            let fieldInfo = updatedPieces[targetField.y][targetField.x]
-            fieldInfo.piece = updatedPieces[movingPiece.y][movingPiece.x].piece
+            updatedPieces[targetField.y][targetField.x].piece = updatedPieces[movingPiece.y][movingPiece.x].piece
             updatedPieces[movingPiece.y][movingPiece.x].piece = null
             updatedPieces[movingPiece.y][movingPiece.x].highlighted = false
 
@@ -33,8 +32,8 @@ const ShowGame = () => {
         if (movingPiece.x && movingPiece.y) {
             const updatedPieces = { ...pieces };
 
-            Object.entries(updatedPieces).map(([y, subset]) => {
-                Object.entries(subset).map(([x, _]) => {
+            Object.entries(updatedPieces).forEach(([y, subset]) => {
+                Object.entries(subset).forEach(([x, _]) => {
                     if (Number(x) != movingPiece.x || Number(y) != movingPiece.y) {
                         updatedPieces[Number(y)][Number(x)].highlighted = false
                     }

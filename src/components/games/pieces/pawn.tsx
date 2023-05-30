@@ -1,9 +1,9 @@
 import WhitePawnPicture from '../../../static/whitePawn.png'
 import BlackPawnPicture from '../../../static/blackPawn.png'
 
-import { PawnPosition } from './position'
+import { Position } from './position'
 
-interface PawnType extends PawnPosition {
+interface PawnType extends Position {
     colour: boolean | null
 }
 

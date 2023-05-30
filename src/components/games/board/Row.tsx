@@ -1,10 +1,10 @@
+import { setPosition } from "../../../types/state-types";
 import Colours from "../pieces/Colours";
 import PieceMaker from "../pieces/PieceMaker";
-import { FieldPosition, PawnPosition } from "../pieces/position";
 import Field from "./Field";
 import SubSet from "./SubSet";
 
-const Row = ({ y, row, setMovingPiece, setTargetField }: { y: number, row: SubSet, setMovingPiece: ({ x, y }: PawnPosition) => void, setTargetField: ({ x, y }: FieldPosition) => void }) => {
+const Row = ({ y, row, setMovingPiece, setTargetField }: { y: number, row: SubSet, setMovingPiece: setPosition, setTargetField: setPosition }) => {
     return (
         < div className="chess-row" key={y} >
             {

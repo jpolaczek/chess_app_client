@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { FieldPosition, PawnPosition } from "../pieces/position";
+import { Position } from "../pieces/position";
+import { setPosition } from "../../../types/state-types";
 
 const Field = ({
     x,
@@ -9,14 +10,13 @@ const Field = ({
     highlighted,
     setTargetField,
     setMovingPiece
-}: FieldPosition &
+}: Position &
     {
         children: JSX.Element | null;
         colour: string;
         highlighted: boolean,
-        setTargetField: ({ x, y }: FieldPosition) => void;
-    } & {
-        setMovingPiece: ({ x, y }: PawnPosition) => void;
+        setTargetField: setPosition,
+        setMovingPiece: setPosition
     }) => {
     const onClickHandle = (x: number, y: number) => {
         if (!children) {

@@ -1,9 +1,9 @@
 import Pawn from "./Pawn"
 import Piece from "./Piece"
 import Pieces from "./Pieces"
-import { PawnPosition } from "./position"
+import { Position } from "./position"
 
-const PieceMaker = ({ x, y, piece }: PawnPosition & { piece: Piece | null }): JSX.Element | null => {
+const PieceMaker = ({ x, y, piece }: Position & { piece: Piece | null }): JSX.Element | null => {
     if (piece) {
         switch (piece.pieceType) {
             case Pieces.Pawn: {
