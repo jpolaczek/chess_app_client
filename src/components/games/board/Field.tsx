@@ -9,20 +9,26 @@ const Field = ({
     colour,
     highlighted,
     setTargetField,
-    setMovingPiece
+    setMovingPiece,
+    movingPiece
 }: Position &
     {
         children: JSX.Element | null;
         colour: string;
         highlighted: boolean,
         setTargetField: setPosition,
-        setMovingPiece: setPosition
+        setMovingPiece: setPosition,
+        movingPiece: Position
     }) => {
     const onClickHandle = (x: number, y: number) => {
         if (!children) {
             setTargetField({ x, y });
         } else {
-            setMovingPiece({ x, y });
+            if (movingPiece.x && movingPiece.y) {
+                setTargetField({ x, y });
+            } else {
+                setMovingPiece({ x, y });
+            }
         }
     };
 

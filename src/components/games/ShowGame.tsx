@@ -25,6 +25,8 @@ const ShowGame = () => {
             updatedPieces[movingPiece.y][movingPiece.x].highlighted = false
 
             setPieces(updatedPieces)
+            setMovingPiece({ x: 0, y: 0 })
+            setMovingPiece({ x: 0, y: 0 })
         }
     }, [targetField])
 
@@ -47,7 +49,7 @@ const ShowGame = () => {
     return (
         <div>
             <h3>Game {id}</h3>
-            {!loading && <Board pieces={pieces} setMovingPiece={setMovingPiece} setTargetField={setTargetField} />}
+            {!loading && <Board pieces={pieces} setMovingPiece={setMovingPiece} setTargetField={setTargetField} movingPiece={movingPiece} />}
         </div >
     );
 }
