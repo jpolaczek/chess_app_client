@@ -1,19 +1,14 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Signup from "./components/users/Signup";
 import SignIn from "./components/session/SignIn";
 import Home from "./components/Home";
 import fetchSessionData from "./fetchers/sessionData";
-import Login from "./components/navbar/Login";
-import Nav from "react-bootstrap/esm/Nav";
-import Navbar from "react-bootstrap/esm/Navbar";
-import Container from "react-bootstrap/esm/Container";
 import { useState, useEffect } from "react";
 import CreateGame from "./components/games/CreateGame";
 import PrivateRoute from "./components/PrivateRoute";
 import ShowGame from "./components/games/ShowGame";
-import UserDropdown from "./components/navbar/UserDropdown";
-import SignUp from "./components/navbar/SignUp";
+import NavMenu from "./components/navbar/NavMenu";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -25,27 +20,15 @@ function App() {
   useEffect(() => {
     fetchSessionData(setLoggedIn, setUsername, setUserId, setError, setLoading);
   }, []);
-
   return (
     <Router>
       <div className="App">
-        <Navbar bg="light" expand="lg">
-          <Container>
-            <Nav>
-              <Navbar.Brand href="#home">Amazing Chess App</Navbar.Brand>
-            </Nav>
-            <Navbar.Collapse id="justify-content-end" style={{ flex: "none" }}>
-              {loggedIn && (
-                <UserDropdown
-                  userName={username}
-                  handleLogout={setLoggedIn}
-                ></UserDropdown>
-              )}
-              {!loggedIn && <Login loggedIn={loggedIn} error={error} />}
-              {!loggedIn && <SignUp loggedIn={loggedIn} error={error} />}
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+        <NavMenu
+          handleLogout={setLoggedIn}
+          loggedIn={loggedIn}
+          username={username}
+          error={error}
+        ></NavMenu>
         <div className="content">
           {!loading && (
             <Switch>
@@ -53,7 +36,7 @@ function App() {
                 <Signup />
               </Route>
               <Route exact path="/sign_in">
-                <SignIn setLoggedIn={setLoggedIn} />
+                <SignIn setLoggedIn={setLoggedIn} setUsername={setUsername} />
               </Route>
               <Route exact path="/games/new">
                 <PrivateRoute isLogged={loggedIn}>
